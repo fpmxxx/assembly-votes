@@ -60,4 +60,10 @@ public class VotoDTO implements Serializable {
 		this.quantidadeVotos = quantidadeVotos;
 	}
 
+	@Override
+	public String toString() {
+		return "VotoDTO [pautaId=" + pautaId + ", pauta=" + pauta + ", voto=" + voto + ", quantidadeVotos="
+				+ quantidadeVotos + "]";
+	}
+
 }

@@ -16,7 +16,7 @@ import com.assemblyvotes.domain.Pauta;
 import com.assemblyvotes.dto.PautaDTO;
 import com.assemblyvotes.dto.PautaListDTO;
 import com.assemblyvotes.exceptions.RepeatedException;
-import com.assemblyvotes.repository.PautaListRepository;
+import com.assemblyvotes.repository.PautaSearchRepository;
 import com.assemblyvotes.repository.PautaRepository;
 
 /**
@@ -31,7 +31,7 @@ public class PautaService {
 	private PautaRepository pautaRepository;
 	
 	@Autowired
-	private PautaListRepository pautaListRepository;
+	private PautaSearchRepository pautaSearchRepository;
 	
 	@Autowired
 	private MessageSource messageSource;
@@ -46,7 +46,7 @@ public class PautaService {
 	public PautaDTO save(PautaDTO pautaDTO) throws Exception {
 		LOGGER.info("save: {}", pautaDTO.toString());
 		
-		List<Pauta> listPauta = pautaListRepository.findPauta(pautaDTO.getNome().trim());
+		List<Pauta> listPauta = pautaSearchRepository.findPauta(pautaDTO.getNome().trim());
 		
 		if (listPauta.isEmpty()) {
 			Pauta pauta = new Pauta();
@@ -66,7 +66,7 @@ public class PautaService {
 		
 		Pageable pageable = PageRequest.of(page, size);
 		
-		Page<Pauta> pagePauta = pautaListRepository.findAll(pageable);
+		Page<Pauta> pagePauta = pautaSearchRepository.findAll(pageable);
 		
 		PautaListDTO dto = new PautaListDTO();
 		dto.setListPauta(pagePauta.getContent());

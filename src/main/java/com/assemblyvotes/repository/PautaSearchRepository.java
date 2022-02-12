@@ -13,7 +13,7 @@ import com.assemblyvotes.domain.Pauta;
  * Interface para consultas no banco de dados com a tabela pauta
  */
 @Repository
-public interface PautaListRepository extends PagingAndSortingRepository<Pauta, Long> {
+public interface PautaSearchRepository extends PagingAndSortingRepository<Pauta, Long> {
 
 	@Query("SELECT p FROM Pauta p WHERE UPPER(p.nome) LIKE CONCAT('%', UPPER(:nome),'%')")
 	List<Pauta> findPauta(@Param("nome") String nome);

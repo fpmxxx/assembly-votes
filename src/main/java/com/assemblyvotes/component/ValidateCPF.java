@@ -15,8 +15,12 @@ public class ValidateCPF {
 	
 	private Logger LOGGER = LogManager.getLogger(ValidateCPF.class);
 
+	/**
+	 * Verifica cpf
+	 * @param cpf
+	 * @return
+	 */
 	public boolean isCPF(String cpf) {
-		
 		LOGGER.info("cpf: {}", cpf);
 
 		cpf = removeCaracteresEspeciais(cpf);
