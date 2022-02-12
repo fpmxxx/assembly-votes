@@ -6,8 +6,7 @@ import java.util.List;
 import com.assemblyvotes.domain.Pauta;
 
 /**
- * Classe responsavel pelo mapeamento dos campos retornados da lista de pautas
- * cadastradas
+ * Classe responsavel pelo mapeamento dos campos retornados da lista de pautas cadastradas
  */
 public class PautaListDTO implements Serializable {
 

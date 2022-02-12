@@ -1,4 +1,4 @@
-package com.assemblyvotes;
+package com.assemblyvotes.service;
 
 import java.util.List;
 
