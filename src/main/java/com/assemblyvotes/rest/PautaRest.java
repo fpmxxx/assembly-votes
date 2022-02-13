@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.assemblyvotes.dto.PautaRequestDTO;
 import com.assemblyvotes.dto.PautaListResponseDTO;
+import com.assemblyvotes.dto.PautaRequestDTO;
+import com.assemblyvotes.dto.PautaResponseDTO;
 import com.assemblyvotes.service.PautaService;
 
 import io.swagger.annotations.Api;
@@ -37,10 +38,10 @@ public class PautaRest {
 			@ApiResponse(code = 200, message = "Pauta salva com sucesso"),
 			@ApiResponse(code = 500, message = "Erro ao salvar pauta"), })
 	@PostMapping("/save")
-	public ResponseEntity<PautaRequestDTO> save(@RequestBody @Valid PautaRequestDTO pautaRequestDTO) 
+	public ResponseEntity<PautaResponseDTO> save(@RequestBody @Valid PautaRequestDTO pautaRequestDTO) 
 			throws Exception {
-		pautaRequestDTO = pautaService.save(pautaRequestDTO);
-		return new ResponseEntity<PautaRequestDTO>(pautaRequestDTO, HttpStatus.OK);
+		PautaResponseDTO pautaResponseDTO = pautaService.save(pautaRequestDTO);
+		return new ResponseEntity<PautaResponseDTO>(pautaResponseDTO, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Lista de pautas criadas")

@@ -10,16 +10,16 @@ public class VotoListResponseDTO implements Serializable {
 
 	private static final long serialVersionUID = -409724064441342348L;
 
-	private List<VotoDTO> listVotoDTO;
+	private List<VotoDTO> listVoto;
 
 	private Integer totalPage;
 
-	public List<VotoDTO> getListVotoDTO() {
-		return listVotoDTO;
+	public List<VotoDTO> getListVoto() {
+		return listVoto;
 	}
 
-	public void setListVotoDTO(List<VotoDTO> listVotoDTO) {
-		this.listVotoDTO = listVotoDTO;
+	public void setListVoto(List<VotoDTO> listVoto) {
+		this.listVoto = listVoto;
 	}
 
 	public Integer getTotalPage() {

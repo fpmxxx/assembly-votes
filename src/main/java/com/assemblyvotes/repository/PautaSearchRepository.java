@@ -15,7 +15,7 @@ import com.assemblyvotes.domain.Pauta;
 @Repository
 public interface PautaSearchRepository extends PagingAndSortingRepository<Pauta, Long> {
 
-	@Query("SELECT p FROM Pauta p WHERE UPPER(p.nome) LIKE CONCAT('%', UPPER(:nome),'%')")
+	@Query("SELECT p FROM Pauta p WHERE UPPER(p.nome) LIKE CONCAT(UPPER(:nome))")
 	List<Pauta> findPauta(@Param("nome") String nome);
 
 }

@@ -16,8 +16,6 @@ public class PautaRequestDTO implements Serializable {
 
 	private static final long serialVersionUID = -2200704939382311323L;
 
-	private Long id;
-
 	@NotNull(message = "{msg.required}")
 	@Size(message = "{msg.size}", min = 3, max = 50)
 	private String nome;
@@ -31,17 +29,8 @@ public class PautaRequestDTO implements Serializable {
 	}
 
 	public PautaRequestDTO(Pauta pauta) {
-		this.id = pauta.getId();
 		this.nome = pauta.getNome();
 		this.minutosVotacao = pauta.getMinutosVotacao();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -62,7 +51,7 @@ public class PautaRequestDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PautaRequestDTO [id=" + id + ", nome=" + nome + ", minutosVotacao=" + minutosVotacao + "]";
+		return "PautaRequestDTO [nome=" + nome + ", minutosVotacao=" + minutosVotacao + "]";
 	}
 
 }

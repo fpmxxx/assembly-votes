@@ -100,7 +100,7 @@ public class VotoService {
 		
 		Page<VotoDTO> pageVote = votoSearchRepository.listVotos(pageable);
 		VotoListResponseDTO dto = new VotoListResponseDTO();
-		dto.setListVotoDTO(pageVote.getContent());
+		dto.setListVoto(pageVote.getContent());
 		dto.setTotalPage(pageVote.getTotalPages());
 		
 		return dto;

@@ -13,11 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.assemblyvotes.domain.Pauta;
-import com.assemblyvotes.dto.PautaRequestDTO;
 import com.assemblyvotes.dto.PautaListResponseDTO;
+import com.assemblyvotes.dto.PautaRequestDTO;
+import com.assemblyvotes.dto.PautaResponseDTO;
 import com.assemblyvotes.exceptions.RepeatedException;
-import com.assemblyvotes.repository.PautaSearchRepository;
 import com.assemblyvotes.repository.PautaRepository;
+import com.assemblyvotes.repository.PautaSearchRepository;
 
 /**
  *  Classe que processa a informacoes das pautas
@@ -43,7 +44,7 @@ public class PautaService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public PautaRequestDTO save(PautaRequestDTO pautaRequestDTO) throws Exception {
+	public PautaResponseDTO save(PautaRequestDTO pautaRequestDTO) throws Exception {
 		LOGGER.info("save: {}", pautaRequestDTO.toString());
 		
 		List<Pauta> listPauta = pautaSearchRepository.findPauta(pautaRequestDTO.getNome().trim());
@@ -54,7 +55,7 @@ public class PautaService {
 			pauta.setMinutosVotacao(pautaRequestDTO.getMinutosVotacao());
 			
 			pauta = pautaRepository.save(pauta);
-			return new PautaRequestDTO(pauta);
+			return new PautaResponseDTO(pauta);
 		} else {
 			throw new RepeatedException(messageSource.getMessage("msg.repeated", null, null));
 		}
