@@ -3,8 +3,6 @@ package com.assemblyvotes.exceptions;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -28,11 +26,8 @@ public class RestExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	public ErrorMessage globalExceptionHandler(Exception ex, WebRequest request) {
-		
 		ErrorMessage message = null;
-		
 		message = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
-		
 		return message;
 	}
 	

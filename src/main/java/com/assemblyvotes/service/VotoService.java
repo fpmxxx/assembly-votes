@@ -24,7 +24,6 @@ import com.assemblyvotes.domain.VotoPK;
 import com.assemblyvotes.dto.VotoDTO;
 import com.assemblyvotes.dto.VotoListResponseDTO;
 import com.assemblyvotes.dto.VotoRequestDTO;
-import com.assemblyvotes.exceptions.CPFInvalidException;
 import com.assemblyvotes.exceptions.TimeoutSessionException;
 import com.assemblyvotes.exceptions.VotedException;
 import com.assemblyvotes.repository.PautaRepository;
@@ -65,12 +64,12 @@ public class VotoService {
 	public String save(VotoRequestDTO votoRequestDTO) throws Exception {
 		LOGGER.debug("save - votoRequestDTO: {}", votoRequestDTO.toString());
 		
-		if (!validateCPF.isCPF(votoRequestDTO.getCpf())) {
-			throw new CPFInvalidException(messageSource.getMessage("msg.cpf.invalid", null, null));
-		}
+		validateCPF.isCPF(votoRequestDTO.getCpf());
 		
 		Pauta pauta = pautaSearchRepository.findById(votoRequestDTO.getPautaId()).orElseThrow(() -> 
 			new EntityNotFoundException(messageSource.getMessage("msg.pauta.notFound", null, null)));
+		
+		LOGGER.debug("pauta: {}", pauta.toString());
 		
 		checkTimeoutSession(pauta);
 		
@@ -114,7 +113,6 @@ public class VotoService {
 	 */
 	private void checkTimeoutSession(Pauta pauta) {
 		Calendar now = Calendar.getInstance();
-		LOGGER.debug("checkTimeoutSession - start: {} - finish: {}", pauta.getDataInicio(), now.getTime());
 		
 		Long timeSessionOpen = 0L;
 		

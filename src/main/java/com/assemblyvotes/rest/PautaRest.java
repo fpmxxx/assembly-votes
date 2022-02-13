@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.assemblyvotes.dto.PautaDTO;
-import com.assemblyvotes.dto.PautaListDTO;
+import com.assemblyvotes.dto.PautaRequestDTO;
+import com.assemblyvotes.dto.PautaListResponseDTO;
 import com.assemblyvotes.service.PautaService;
 
 import io.swagger.annotations.Api;
@@ -37,10 +37,10 @@ public class PautaRest {
 			@ApiResponse(code = 200, message = "Pauta salva com sucesso"),
 			@ApiResponse(code = 500, message = "Erro ao salvar pauta"), })
 	@PostMapping("/save")
-	public ResponseEntity<PautaDTO> save(@RequestBody @Valid PautaDTO pautaDTO) 
+	public ResponseEntity<PautaRequestDTO> save(@RequestBody @Valid PautaRequestDTO pautaRequestDTO) 
 			throws Exception {
-		pautaDTO = pautaService.save(pautaDTO);
-		return new ResponseEntity<PautaDTO>(pautaDTO, HttpStatus.OK);
+		pautaRequestDTO = pautaService.save(pautaRequestDTO);
+		return new ResponseEntity<PautaRequestDTO>(pautaRequestDTO, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "Lista de pautas criadas")
@@ -48,9 +48,9 @@ public class PautaRest {
 			@ApiResponse(code = 200, message = "Retorna lista de pautas criadas"),
 			@ApiResponse(code = 500, message = "Erro ao consular pauta"), })
 	@GetMapping("/list")
-	public ResponseEntity<PautaListDTO> getStave(@RequestParam Integer page, @RequestParam Integer size)
+	public ResponseEntity<PautaListResponseDTO> getStave(@RequestParam Integer page, @RequestParam Integer size)
 			throws Exception {
-		PautaListDTO dto = pautaService.listPauta(page, size);
-		return new ResponseEntity<PautaListDTO>(dto, HttpStatus.OK);
+		PautaListResponseDTO dto = pautaService.listPauta(page, size);
+		return new ResponseEntity<PautaListResponseDTO>(dto, HttpStatus.OK);
 	}
 }

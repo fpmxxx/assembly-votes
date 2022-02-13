@@ -64,4 +64,10 @@ public class Pauta {
 		this.minutosVotacao = minutosVotacao;
 	}
 
+	@Override
+	public String toString() {
+		return "Pauta [id=" + id + ", nome=" + nome + ", dataInicio=" + dataInicio + ", minutosVotacao="
+				+ minutosVotacao + "]";
+	}
+
 }

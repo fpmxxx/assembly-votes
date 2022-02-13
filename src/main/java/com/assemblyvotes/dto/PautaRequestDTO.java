@@ -12,7 +12,7 @@ import com.assemblyvotes.domain.Pauta;
 /**
  * Classe responsavel pelo mapeamento dos campos da pauta para requisicoes rest
  */
-public class PautaDTO implements Serializable {
+public class PautaRequestDTO implements Serializable {
 
 	private static final long serialVersionUID = -2200704939382311323L;
 
@@ -26,11 +26,11 @@ public class PautaDTO implements Serializable {
 	@Max(message = "{msg.max}", value = 60)
 	private Integer minutosVotacao;
 
-	public PautaDTO() {
+	public PautaRequestDTO() {
 		super();
 	}
 
-	public PautaDTO(Pauta pauta) {
+	public PautaRequestDTO(Pauta pauta) {
 		this.id = pauta.getId();
 		this.nome = pauta.getNome();
 		this.minutosVotacao = pauta.getMinutosVotacao();
@@ -62,7 +62,7 @@ public class PautaDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PautaDTO [id=" + id + ", nome=" + nome + ", minutosVotacao=" + minutosVotacao + "]";
+		return "PautaRequestDTO [id=" + id + ", nome=" + nome + ", minutosVotacao=" + minutosVotacao + "]";
 	}
 
 }

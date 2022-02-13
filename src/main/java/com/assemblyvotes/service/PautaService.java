@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.assemblyvotes.domain.Pauta;
-import com.assemblyvotes.dto.PautaDTO;
-import com.assemblyvotes.dto.PautaListDTO;
+import com.assemblyvotes.dto.PautaRequestDTO;
+import com.assemblyvotes.dto.PautaListResponseDTO;
 import com.assemblyvotes.exceptions.RepeatedException;
 import com.assemblyvotes.repository.PautaSearchRepository;
 import com.assemblyvotes.repository.PautaRepository;
@@ -38,37 +38,37 @@ public class PautaService {
 	
 	/**
 	 * Salva uma nova pauta caso nao exista
-	 * @param pautaDTO
+	 * @param pautaRequestDTO
 	 * @return
 	 * @throws Exception
 	 */
 	@Transactional
-	public PautaDTO save(PautaDTO pautaDTO) throws Exception {
-		LOGGER.info("save: {}", pautaDTO.toString());
+	public PautaRequestDTO save(PautaRequestDTO pautaRequestDTO) throws Exception {
+		LOGGER.info("save: {}", pautaRequestDTO.toString());
 		
-		List<Pauta> listPauta = pautaSearchRepository.findPauta(pautaDTO.getNome().trim());
+		List<Pauta> listPauta = pautaSearchRepository.findPauta(pautaRequestDTO.getNome().trim());
 		
 		if (listPauta.isEmpty()) {
 			Pauta pauta = new Pauta();
-			pauta.setNome(pautaDTO.getNome());
-			pauta.setMinutosVotacao(pautaDTO.getMinutosVotacao());
+			pauta.setNome(pautaRequestDTO.getNome());
+			pauta.setMinutosVotacao(pautaRequestDTO.getMinutosVotacao());
 			
 			pauta = pautaRepository.save(pauta);
-			return new PautaDTO(pauta);
+			return new PautaRequestDTO(pauta);
 		} else {
 			throw new RepeatedException(messageSource.getMessage("msg.repeated", null, null));
 		}
 	}
 
 	@Transactional(readOnly = true)
-	public PautaListDTO listPauta(Integer page, Integer size) {
+	public PautaListResponseDTO listPauta(Integer page, Integer size) {
 		LOGGER.info("listPauta - page: {}, size: {}", page, size);
 		
 		Pageable pageable = PageRequest.of(page, size);
 		
 		Page<Pauta> pagePauta = pautaSearchRepository.findAll(pageable);
 		
-		PautaListDTO dto = new PautaListDTO();
+		PautaListResponseDTO dto = new PautaListResponseDTO();
 		dto.setListPauta(pagePauta.getContent());
 		dto.setTotalPage(pagePauta.getTotalPages());
 		

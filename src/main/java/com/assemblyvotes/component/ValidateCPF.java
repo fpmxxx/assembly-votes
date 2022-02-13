@@ -4,7 +4,11 @@ import java.util.InputMismatchException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
+
+import com.assemblyvotes.exceptions.CPFInvalidException;
 
 /**
  * Classe para validacao de cpf
@@ -14,13 +18,16 @@ import org.springframework.stereotype.Component;
 public class ValidateCPF {
 	
 	private Logger LOGGER = LogManager.getLogger(ValidateCPF.class);
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	/**
 	 * Verifica cpf
 	 * @param cpf
 	 * @return
 	 */
-	public boolean isCPF(String cpf) {
+	public Boolean isCPF(String cpf) {
 		LOGGER.info("cpf: {}", cpf);
 
 		cpf = removeCaracteresEspeciais(cpf);
@@ -29,8 +36,9 @@ public class ValidateCPF {
 		if (cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222")
 				|| cpf.equals("33333333333") || cpf.equals("44444444444") || cpf.equals("55555555555")
 				|| cpf.equals("66666666666") || cpf.equals("77777777777") || cpf.equals("88888888888")
-				|| cpf.equals("99999999999") || (cpf.length() != 11))
-			return (false);
+				|| cpf.equals("99999999999") || (cpf.length() != 11)) {
+			throw new CPFInvalidException(messageSource.getMessage("msg.cpf.invalid", null, null));			
+		}
 
 		char dig10, dig11;
 		int sm, i, r, num, peso;
@@ -71,12 +79,13 @@ public class ValidateCPF {
 				dig11 = (char) (r + 48);
 
 			// Verifica se os digitos calculados conferem com os digitos informados.
-			if ((dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10)))
-				return (true);
-			else
-				return (false);
+			if ((dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10))) {
+				return true;
+			} else {
+				throw new CPFInvalidException(messageSource.getMessage("msg.cpf.invalid", null, null));
+			}
 		} catch (InputMismatchException erro) {
-			return (false);
+			throw new CPFInvalidException(messageSource.getMessage("msg.cpf.invalid", null, null));
 		}
 	}
 

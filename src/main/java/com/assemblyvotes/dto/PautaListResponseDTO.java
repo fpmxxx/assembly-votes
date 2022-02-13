@@ -8,7 +8,7 @@ import com.assemblyvotes.domain.Pauta;
 /**
  * Classe responsavel pelo mapeamento dos campos retornados da lista de pautas cadastradas
  */
-public class PautaListDTO implements Serializable {
+public class PautaListResponseDTO implements Serializable {
 
 	private static final long serialVersionUID = 1781278912913571491L;
 

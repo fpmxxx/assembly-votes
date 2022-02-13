@@ -1,18 +1,29 @@
 package com.assemblyvotes.component;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.MessageSource;
+
+import com.assemblyvotes.exceptions.CPFInvalidException;
 
 /**
  * Testes de validacao de CPF
  */
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class ValidateCPFTest {
 	
-	@Autowired
+	@Mock
+	private MessageSource messageSource;
+	
+	@InjectMocks
 	private ValidateCPF validateCPF;
 
 	@Test
@@ -22,7 +33,13 @@ class ValidateCPFTest {
 	
 	@Test
 	void testIsCPFInvalid() {
-		assertFalse(validateCPF.isCPF("00000000000"));
+		Mockito.when(messageSource.getMessage("msg.cpf.invalid", null, null)).thenReturn("CPF inválido");
+		
+		CPFInvalidException thrown = Assertions.assertThrows(CPFInvalidException.class, () -> {
+			validateCPF.isCPF("00000000000");
+		});
+		
+		assertEquals("CPF inválido", thrown.getMessage());
 	}
 
 }
