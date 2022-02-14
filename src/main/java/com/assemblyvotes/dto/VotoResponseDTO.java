@@ -3,7 +3,7 @@ package com.assemblyvotes.dto;
 import java.io.Serializable;
 
 /**
- * Classe responsavel pelo retorno do voto
+ * Classe responsavel pelo mapeamento dos campos do voto para requisicoes rest
  */
 public class VotoResponseDTO implements Serializable {
 

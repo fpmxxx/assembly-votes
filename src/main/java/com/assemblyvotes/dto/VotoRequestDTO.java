@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 
 //import org.hibernate.validator.constraints.br.CPF;
 
+/**
+ * Classe responsavel pelo mapeamento dos campos do voto para requisicoes rest
+ */
 public class VotoRequestDTO implements Serializable {
 
 	private static final long serialVersionUID = -3898707039012756119L;

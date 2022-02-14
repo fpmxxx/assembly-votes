@@ -7,7 +7,7 @@ import com.assemblyvotes.domain.Voto;
 import com.assemblyvotes.domain.VotoPK;
 
 /**
- * Interface responsavel por operacoes com banco de dados dos votos 
+ * Interface responsavel por operacoes com banco de dados da tabela voto 
  */
 @Repository
 public interface VotoRepository extends CrudRepository<Voto, VotoPK> {

@@ -61,6 +61,12 @@ public class PautaService {
 		}
 	}
 
+	/**
+	 * Lista de pautas cadastradas
+	 * @param page
+	 * @param size
+	 * @return
+	 */
 	@Transactional(readOnly = true)
 	public PautaListResponseDTO listPauta(Integer page, Integer size) {
 		LOGGER.info("listPauta - page: {}, size: {}", page, size);

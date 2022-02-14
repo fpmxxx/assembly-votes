@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 /**
- * Classe que recebe as requisicoes rest
+ * Classe que recebe as requisicoes rest das pautas
  */
 @Api
 @RestController

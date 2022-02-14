@@ -22,6 +22,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * Classe que recebe as requisicoes rest dos votos
+ */
 @Api
 @RestController
 @RequestMapping("/v1/voto")

@@ -13,7 +13,7 @@ import com.assemblyvotes.domain.VotoPK;
 import com.assemblyvotes.dto.VotoDTO;
 
 /**
- * Interface responsavel por consultas com banco de dados dos votos
+ * Interface responsavel por consultas com banco de dados da tabela voto 
  */
 @Repository
 public interface VotoSearchRepository extends PagingAndSortingRepository<Voto, VotoPK> {

@@ -60,6 +60,14 @@ public class VotoService {
 	@Value("${config.time-session}")
 	private Long timeSession;
 	
+	
+	/**
+	 * Salva voto caso o cpf informado ainda nao tenha votado para a pauta selecionada
+	 * e a votacao ainda nao tenha sido encerrada
+	 * @param votoRequestDTO
+	 * @return
+	 * @throws Exception
+	 */
 	@Transactional
 	public String save(VotoRequestDTO votoRequestDTO) throws Exception {
 		LOGGER.debug("save - votoRequestDTO: {}", votoRequestDTO.toString());
